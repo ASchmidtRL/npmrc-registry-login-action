@@ -17,7 +17,9 @@ inputs:
     description: 'The registry auth token'
     required: true
   path:
-    description: 'The directory to manage the .npmrc file in (defaults to the currnet directory)'
+    description:
+      'The directory to manage the .npmrc file in (defaults to the current
+      directory)'
     required: false
 
 runs:
