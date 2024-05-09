@@ -1,10 +1,11 @@
 # .npmrc Registry Login Action
 
-This action logs into NPM registries by managing a .npmrc file.
+This action logs into npm registries by managing a .npmrc file.
 
 It will create one if it doesn't exist or append to an existing one.
 
-You have the ability to login to multiple registries by using this action multiple times.
+You have the ability to login to multiple registries by using this action
+multiple times.
 
 ## Inputs
 
