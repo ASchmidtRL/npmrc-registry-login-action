@@ -1,19 +1,25 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: '.npmrc registry login'
 
-# Define your inputs here.
+description: 'Logs into NPM registries by managing a .npmrc file'
+
+branding:
+  color: 'red'
+  icon: 'file-plus'
+
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  scope:
+    description: 'The registry scope (e.g. @acmeorg)'
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
+  registry:
+    description: 'The registry domain (e.g. https://npm.pkg.github.com)'
+    required: true
+  auth-token:
+    description: 'The registry auth token'
+    required: true
+  path:
+    description: 'The directory to manage the .npmrc file in (defaults to the currnet directory)'
+    required: false
 
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'dist/index.js'

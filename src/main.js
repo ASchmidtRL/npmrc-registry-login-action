@@ -1,5 +1,6 @@
 const core = require('@actions/core')
-const { wait } = require('./wait')
+const fs = require('fs');
+const path = require('path');
 
 /**
  * The main function for the action.
@@ -7,21 +8,21 @@ const { wait } = require('./wait')
  */
 async function run() {
   try {
-    const ms = core.getInput('milliseconds', { required: true })
-
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    const scope = core.getInput('scope');
+    const registry = core.getInput('registry');
+    const authToken = core.getInput('auth-token');
+    const inputPath = core.getInput('path');
+  
+    const npmrcPath = path.resolve(process.cwd(), inputPath, '.npmrc');
+  
+    console.log(`Writing to ${npmrcPath}`);
+  
+    fs.appendFileSync(npmrcPath, `\n${scope}:registry=${registry}`);
+    fs.appendFileSync(npmrcPath, `\n${registry.replace(/^http(?:s)?:/, '')}/:_authToken=${authToken}`);
+  
+    console.info(`Succesfully wrote to ${npmrcPath}`);
   } catch (error) {
-    // Fail the workflow run if an error occurs
-    core.setFailed(error.message)
+    core.setFailed(error.message);
   }
 }
 
