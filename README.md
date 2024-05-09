@@ -52,3 +52,9 @@ with:
 nvm install
 ncc build index.js --license licenses.txt
 ```
+
+## Acknowledgements
+
+Thanks to the creators of the code that this was based on
+
+- [healthplace/npmrc-registry-login-action](https://github.com/healthplace/npmrc-registry-login-action)
